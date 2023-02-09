@@ -13,9 +13,9 @@ import org.springframework.scheduling.annotation.EnableScheduling
 @EnableScheduling
 @MapperScan("org.yameida.worktool.data.mapper")
 @SpringBootApplication(exclude = [DataSourceAutoConfiguration::class])
-open class AggregationCenterApplication
+open class Application
 
 fun main(args: Array<String>) {
-    runApplication<AggregationCenterApplication>(*args)
+    runApplication<Application>(*args)
 }
 
