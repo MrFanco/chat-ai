@@ -13,9 +13,8 @@ import org.springframework.scheduling.annotation.EnableScheduling
 @EnableScheduling
 @MapperScan("org.yameida.worktool.data.mapper")
 @SpringBootApplication(exclude = [DataSourceAutoConfiguration::class])
-open class Application
-
+open class ChatAIApplication
 fun main(args: Array<String>) {
-    runApplication<Application>(*args)
+    runApplication<ChatAIApplication>(*args)
 }
 

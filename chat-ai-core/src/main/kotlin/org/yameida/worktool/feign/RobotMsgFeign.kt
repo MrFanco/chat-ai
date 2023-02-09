@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.yameida.worktool.common.api.CommonResult
-import org.yameida.worktool.common.msgBean.RobotMgsItem
+
 import org.yameida.worktool.common.msgBean.WeworkMessageListBean
 
 /**
@@ -29,12 +29,4 @@ interface RobotMsgFeign {
         @RequestParam("key") key: String,
         @RequestBody msg: WeworkMessageListBean
     ): CommonResult<Any>
-
-    /**
-     * 批量发送信息系
-     * @param list
-     * @return
-     */
-    @PostMapping("sendMsgMulti")
-    fun sendMsgMulti(@RequestBody list: List<RobotMgsItem>): CommonResult<Map<Int, String>>
 }

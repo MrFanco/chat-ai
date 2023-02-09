@@ -5,3 +5,9 @@ spring:
     name: worktool_aggregation_center
   profiles:
     active: local
+
+chat-ai:
+  redis-key:
+    robot: 'chat-ai:robotInfo:'
+    questionQueue: 'chat-ai:questionQueue'
+    errorQuestion: 'chat-ai:errorQuestion'

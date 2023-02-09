@@ -7,4 +7,8 @@ package org.yameida.worktool.service
  * @Version 1.0
  */
 interface RobotService {
+    /**
+     * 判断机器人是已经配置
+     */
+    fun exits(robotId: String): Boolean
 }
