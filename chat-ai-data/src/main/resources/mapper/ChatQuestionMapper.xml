@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yameida.worktool.data.mapper.ChatQuestionMapper">
+
+    <resultMap id="BaseResultMap" type="org.yameida.worktool.data.domain.ChatQuestion">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="robotId" column="robot_id" jdbcType="VARCHAR"/>
+            <result property="spoken" column="spoken" jdbcType="VARCHAR"/>
+            <result property="rawSpoken" column="raw_spoken" jdbcType="VARCHAR"/>
+            <result property="receivedName" column="received_name" jdbcType="VARCHAR"/>
+            <result property="groupName" column="group_name" jdbcType="VARCHAR"/>
+            <result property="groupRemark" column="group_remark" jdbcType="VARCHAR"/>
+            <result property="roomType" column="room_type" jdbcType="INTEGER"/>
+            <result property="atMe" column="at_me" jdbcType="TINYINT"/>
+            <result property="aiId" column="ai_id" jdbcType="INTEGER"/>
+            <result property="answer" column="answer" jdbcType="VARCHAR"/>
+            <result property="costTime" column="cost_time" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="del" column="del" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,robot_id,spoken,
+        raw_spoken,received_name,group_name,
+        group_remark,room_type,at_me,
+        ai_id,answer,cost_time,
+        create_time,update_time,del
+    </sql>
+</mapper>
