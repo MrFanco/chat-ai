@@ -11,4 +11,9 @@ interface RobotService {
      * 判断机器人是已经配置
      */
     fun exits(robotId: String): Boolean
+
+    /**
+     * 获取机器人校验key
+     */
+    fun getKey(robotId: String): String?
 }

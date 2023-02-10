@@ -31,9 +31,9 @@ class MsgAggregationController(val applicationContext: ApplicationContext, val r
         val replyMsg = ReplyMsg()
         if (!exits) {
             replyMsg.setTest("请先绑定机器人id")
-            logger.info("收到机器人id: ${robotId} 未绑定,跳过本次消息")
+            logger.info("收到机器人id: $robotId 未绑定,跳过本次消息")
         } else {
-            logger.info("收到机器人id: ${robotId} 的消息 {}", JSONObject.toJSONString(msg))
+            logger.info("收到机器人id: $robotId 的消息 {}", JSONObject.toJSONString(msg))
             applicationContext.publishEvent(AskQuestionEvent(robotId, msg))
         }
         return CommonResult.success(replyMsg)

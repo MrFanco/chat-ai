@@ -18,7 +18,6 @@ import org.yameida.worktool.common.msgBean.WeworkMessageListBean
 interface RobotMsgFeign {
     /**
      * 发送指令信息
-     *
      * @param robotId
      * @param key
      * @return
@@ -26,7 +25,7 @@ interface RobotMsgFeign {
     @PostMapping("sendRawMessage")
     fun sendRawMessage(
         @RequestParam("robotId") robotId: String,
-        @RequestParam("key") key: String,
+        @RequestParam("key") key: String?,
         @RequestBody msg: WeworkMessageListBean
     ): CommonResult<Any>
 }

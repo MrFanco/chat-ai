@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yameida.worktool.data.mapper.MsgLogMapper">
+
+    <resultMap id="BaseResultMap" type="org.yameida.worktool.data.domain.MsgLog">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="robotId" column="robot_id" jdbcType="VARCHAR"/>
+            <result property="msg" column="msg" jdbcType="VARCHAR"/>
+            <result property="response" column="response" jdbcType="VARCHAR"/>
+            <result property="errorCode" column="error_code" jdbcType="INTEGER"/>
+            <result property="errorReason" column="error_reason" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,robot_id,msg,
+        response,error_code,error_reason
+    </sql>
+</mapper>
