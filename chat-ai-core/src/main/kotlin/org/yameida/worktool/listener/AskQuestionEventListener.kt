@@ -1,25 +1,27 @@
 package org.yameida.worktool.listener
 
-import lombok.extern.slf4j.Slf4j
 import org.springframework.context.ApplicationListener
-import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 import org.yameida.worktool.common.event.AskQuestionEvent
-
+import org.yameida.worktool.service.QuestionService
 
 /**
  * @Author genxm
- * @Description 消息输入监听器
- * @Date 2022/12/16 10:55
+ * @Description 接收到问题事件监听器
+ * @Date 2023/2/13 11:03
  * @Version 1.0
  */
-@Slf4j
 @Component
-open class AskQuestionEventListener : ApplicationListener<AskQuestionEvent> {
+class AskQuestionEventListener(
+    private val questionService: QuestionService
+) : ApplicationListener<AskQuestionEvent> {
 
-    @Async
     override fun onApplicationEvent(event: AskQuestionEvent) {
-
+        val msg = event.getMsg()
+        val robotId = event.getRobotId()
+        //数据入库
+        val saveQuestion = questionService.saveQuestion(robotId, msg)
+        //往问题待问容器中添加问题
+        questionService.addWaitAskContainer(saveQuestion)
     }
-
 }

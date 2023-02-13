@@ -6,17 +6,26 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.annotation.Nonnull;
 
 /**
  * 被询问消息记录
+ *
  * @TableName chat_question
  */
-@TableName(value ="chat_question")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@TableName(value = "chat_question")
 @Data
 public class ChatQuestion implements Serializable {
     /**
-     * 
+     *
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -97,7 +106,7 @@ public class ChatQuestion implements Serializable {
     /**
      * 更新时间
      */
-    @TableField(value = "update_time", fill =FieldFill.INSERT_UPDATE)
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
@@ -110,4 +119,10 @@ public class ChatQuestion implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 消息重试次数,三次不成功丢弃
+     */
+    @TableField(exist = false)
+    private int reTryCount;
 }

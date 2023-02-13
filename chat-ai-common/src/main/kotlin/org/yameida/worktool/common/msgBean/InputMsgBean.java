@@ -28,5 +28,4 @@ public class InputMsgBean {
 
     private boolean atMe;
 
-    private Integer textType;
 }

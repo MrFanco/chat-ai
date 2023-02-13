@@ -47,7 +47,7 @@ spring:
     # 端口，默认为6379
     port: 30020
     # 数据库索引
-    database: 6
+    database: 8
     # 密码
     password: 1qazzaq1
     # 连接超时时间

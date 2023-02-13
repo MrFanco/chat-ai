@@ -11,3 +11,5 @@ chat-ai:
     robot: 'chat-ai:robotInfo:'
     questionQueue: 'chat-ai:questionQueue'
     errorQuestion: 'chat-ai:errorQuestion'
+    msgLock: 'chat-ai:msgLock'
+    AIList: 'chat-ai:AIList'

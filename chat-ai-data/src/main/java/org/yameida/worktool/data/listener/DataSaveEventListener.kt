@@ -21,8 +21,8 @@ open class DataSaveEventListener : ApplicationListener<DataSaveEvent> {
 
     @Async
     override fun onApplicationEvent(event: DataSaveEvent) {
-        val data = event.getData()
-        val clazz = event.getClazz()
+        val data = event.data
+        val clazz = event.clazz
         val service = SpringUtils.getBean(clazz)
         service.save(data)
     }

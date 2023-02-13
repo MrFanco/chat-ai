@@ -22,6 +22,7 @@
         <chat-ai.version>1.0.0</chat-ai.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <redisson.version>2.11.5</redisson.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -69,6 +70,13 @@
                 <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql-connector-j.version}</version>
             </dependency>
+            <!--redission-->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
             <!-- 阿里JSON解析器 -->
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>

@@ -20,10 +20,10 @@ open class DataUpdateEventListener : ApplicationListener<DataUpdateEvent> {
 
     @Async
     override fun onApplicationEvent(event: DataUpdateEvent) {
-        val data = event.getData()
-        val clazz = event.getClazz()
+        val data = event.data
+        val clazz = event.clazz
         val service = SpringUtils.getBean(clazz)
-        service.save(data)
+        service.updateById(data)
     }
 
 }
