@@ -13,3 +13,4 @@ chat-ai:
     errorQuestion: 'chat-ai:errorQuestion'
     msgLock: 'chat-ai:msgLock'
     AIList: 'chat-ai:AIList'
+    AIHost: https://api.openai.com/v1/completions

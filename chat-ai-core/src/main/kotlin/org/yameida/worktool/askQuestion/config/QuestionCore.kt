@@ -3,6 +3,8 @@ package org.yameida.worktool.askQuestion.config
 import org.yameida.worktool.askQuestion.QuestionAskHandler
 import org.yameida.worktool.askQuestion.observer.QuestionObserver
 import org.yameida.worktool.common.utils.ThreadPoolManager
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentMap
 
 /**
  * @Author genxm
@@ -11,6 +13,10 @@ import org.yameida.worktool.common.utils.ThreadPoolManager
  * @Version 1.0
  */
 open class QuestionCore {
+
+    val AIUseMap = ConcurrentHashMap<Int,Long>()
+
+
     /**
      * 线程安全的单利模式
      */
@@ -36,5 +42,15 @@ open class QuestionCore {
         return this
     }
 
-
+    open fun getAIUseAITime(id :Int):Long{
+        var time = AIUseMap[id]
+        if (time == null) {
+            time = System.currentTimeMillis()
+            AIUseMap[id] = time
+        }
+        return time
+    }
+    open fun updateAIUseTime(id: Int, time:Long){
+        AIUseMap[id] = time
+    }
 }

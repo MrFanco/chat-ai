@@ -18,7 +18,7 @@ public class WeworkMessageListBean {
     /**
      * 0 是后台消息，1是APi手动调用
      */
-    private int apiSend = 0;
+    private int apiSend = 1;
     /**
      * 消息id
      */

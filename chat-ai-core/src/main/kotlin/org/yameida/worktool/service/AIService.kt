@@ -13,7 +13,9 @@ interface AIService {
     /**
      * 获取AI列表
      */
-    fun getAIs():MutableList<ChatAi>
+    fun getAIs(): MutableList<ChatAi>
+
+    fun getAnswer(question: String, ai: ChatAi): String?
 
 
 }

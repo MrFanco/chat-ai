@@ -39,9 +39,9 @@ public abstract class BaseHandler extends Observable implements Runnable {
     public abstract void handler();
 
 
-    public void sleep(long millis) {
+    public void sleep(long seconds) {
         try {
-            Thread.sleep(millis);
+            Thread.sleep(seconds*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

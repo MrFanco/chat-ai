@@ -12,6 +12,7 @@ import org.yameida.worktool.data.domain.MsgLog
 import org.yameida.worktool.data.service.MsgLogService
 import org.yameida.worktool.feign.RobotMsgFeign
 import org.yameida.worktool.service.RobotService
+import java.util.concurrent.ConcurrentHashMap
 import javax.annotation.Resource
 
 /**
@@ -23,14 +24,15 @@ import javax.annotation.Resource
 @Component
 class AnswerQuestionEventListener(
     private val robotMsgFeign: RobotMsgFeign,
-    private val robotService: RobotService
+    private val robotService: RobotService,
+    private val applicationContext: ApplicationContext
 ) : ApplicationListener<AnswerQuestionEvent> {
+
+
 
 
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
-    @Resource
-    private val applicationContext: ApplicationContext? = null
     override fun onApplicationEvent(event: AnswerQuestionEvent) {
         val robotId = event.getRobotId()
         val key = robotService.getKey(robotId)
@@ -43,6 +45,6 @@ class AnswerQuestionEventListener(
             builder.errorCode(result.code.toInt()).errorReason(result.message)
         }
         val data = builder.build()
-        applicationContext!!.publishEvent(DataSaveEvent(data, MsgLogService::class.java))
+        applicationContext.publishEvent(DataSaveEvent(data, MsgLogService::class.java))
     }
 }
