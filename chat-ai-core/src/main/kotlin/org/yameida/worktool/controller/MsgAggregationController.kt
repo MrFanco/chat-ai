@@ -9,7 +9,6 @@ import org.yameida.worktool.common.api.CommonResult
 import org.yameida.worktool.common.event.AskQuestionEvent
 import org.yameida.worktool.common.msgBean.InputMsgBean
 import org.yameida.worktool.common.msgBean.ReplyMsg
-import org.yameida.worktool.common.utils.StringUtils
 import org.yameida.worktool.service.RobotService
 
 

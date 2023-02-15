@@ -26,20 +26,15 @@ open class QuestionAskHandler : BaseHandler("消息询问线程") {
     //睡眠系数,单位秒
     private val READ_MSG_TIME_INTERVAL: Long = 1
 
-    private val questionService = SpringUtils.getBean(QuestionService::class.java)
-    private val aiService = SpringUtils.getBean(AIService::class.java)
-    private val applicationContext = SpringUtils.getBean(ApplicationContext::class.java)
-    private val questionCore = SpringUtils.getBean(QuestionCore::class.java)
-
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
     override fun handler() {
 
-        val aIList = aiService.getAIs()
+        val aIList = aIService().getAIs()
         if (CollectionUtil.isEmpty(aIList)) {
             logger.info("无可用AI,请配置ai机器人,系统休眠 $READ_MSG_TIME_INTERVAL 秒钟")
         }
 
-        val question = questionService.getQuestionFromContainer()
+        val question = questionService().getQuestionFromContainer()
         if (question == null) {
             logger.info("无待询问问题,休眠 $READ_MSG_TIME_INTERVAL 秒钟")
             sleep(READ_MSG_TIME_INTERVAL)
@@ -58,31 +53,44 @@ open class QuestionAskHandler : BaseHandler("消息询问线程") {
 
         val askTime = System.currentTimeMillis()
         //获取上次询问时间
-        val lastTime = questionCore.getAIUseAITime(ai.id)
+        val lastTime = questionCore().getAIUseAITime(ai.id)
 
 
         //判断当前机器人能否使用 基础间隔时间未5秒 随机打样
         if (Random().nextBoolean() && askTime - lastTime > 5000) {
             logger.info("ai id为 :${ai.id} 暂时不能使用,消息重新加入到消息队列中 ")
             //消息如果4次不能询问成功就丢弃
-            questionService.addWaitAskContainer(question)
+            questionService().addWaitAskContainer(question)
+            sleep(READ_MSG_TIME_INTERVAL)
             return
         }
-        question.answer = aiService.getAnswer(question.spoken, ai)
+        question.answer = aIService().getAnswer(question.spoken, ai)
         //询问时间
         val answerTime = System.currentTimeMillis();
         question.costTime = (answerTime - askTime).toInt()
 
         //产生新的消息体
         val msg = MsgUtil.initMsg(question.answer, question.groupRemark, question.groupName, question.receivedName)
-        applicationContext.publishEvent(AnswerQuestionEvent(question.robotId, msg))
+        SpringUtils.getApplicationContext().publishEvent(AnswerQuestionEvent(question.robotId, msg))
 
         //更新问题数据库
-        applicationContext.publishEvent(DataUpdateEvent(question, ChatQuestionService::class.java))
+        SpringUtils.getApplicationContext().publishEvent(DataUpdateEvent(question, ChatQuestionService::class.java))
         //更新AI使用时间
-        questionCore.updateAIUseTime(ai.id, answerTime)
+        questionCore().updateAIUseTime(ai.id, answerTime)
         sleep(READ_MSG_TIME_INTERVAL)
     }
 
+    open fun questionService(): QuestionService {
+        return SpringUtils.getBean(QuestionService::class.java);
+    }
 
+    open fun aIService(): AIService {
+        return SpringUtils.getBean(AIService::class.java);
+    }
+
+
+
+    open fun questionCore(): QuestionCore {
+        return SpringUtils.getBean(QuestionCore::class.java);
+    }
 }
